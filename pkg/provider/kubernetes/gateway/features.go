@@ -35,6 +35,12 @@ func extendedGatewayFeatures() sets.Set[features.Feature] {
 		features.GatewayPort8080Feature,
 		features.GatewayHTTPListenerIsolationFeature,
 		features.GatewayHTTPSListenerDetectMisdirectedRequestsFeature,
+		features.ListenerSetFeature,
+		features.GatewayBackendClientCertificateFeature,
+		features.GatewayFrontendClientCertificateValidationFeature,
+		features.GatewayFrontendClientCertificateValidationInsecureFallbackFeature,
+		// TODO: GEP-5075 requires this feature to be advertised only when the cluster serves the ClusterTrustBundle API.
+		features.ClusterTrustBundleFeature,
 	)
 }
 
@@ -62,11 +68,19 @@ func extendedHTTPRouteFeatures() sets.Set[features.Feature] {
 		features.HTTPRouteResponseHeaderModificationFeature,
 		features.HTTPRouteBackendProtocolH2CFeature,
 		features.HTTPRouteBackendProtocolWebSocketFeature,
+		features.HTTPRouteRequestMirrorFeature,
+		features.HTTPRouteRequestMultipleMirrorsFeature,
+		features.HTTPRouteRequestPercentageMirrorFeature,
 		features.HTTPRouteDestinationPortMatchingFeature,
 		features.HTTPRouteBackendRequestHeaderModificationFeature,
 		features.HTTPRouteNamedRouteRule,
 		features.HTTPRouteParentRefPortFeature,
 		features.HTTPRouteCORS,
+		features.HTTPRouteRequestTimeoutFeature,
+		features.HTTPRouteBackendTimeoutFeature,
+		features.HTTPRouteBackendURLRewriteFeature,
+		features.HTTPRouteRetryCodesFeature,
+		features.HTTPRouteRetryConnectionErrorFeature,
 	)
 }
 
@@ -74,6 +88,7 @@ func extendedHTTPRouteFeatures() sets.Set[features.Feature] {
 func extendedGRPCRouteFeatures() sets.Set[features.Feature] {
 	return sets.New(
 		features.GRPCRouteNamedRouteRule,
+		features.GRPCRouteRequestHeaderModifier,
 	)
 }
 
